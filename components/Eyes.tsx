@@ -19,12 +19,6 @@ type EyeProps = {
 };
 
 export default function Eye() {
-  const [eyes, setEyes] = useState([
-    {
-      left: "calc(50% - 50px)",
-      top: "calc(50% - 50px)",
-    },
-  ]);
   const [mouseCoordinates, setMouseCoordinates] = useState<MouseCoordinates>({
     x: 0,
     y: 0,
@@ -39,36 +33,17 @@ export default function Eye() {
     [setMouseCoordinates]
   );
 
-  const clickHandler = useCallback<
-    ({ clientX, clientY }: ClientCoordinates) => void
-  >(
-    ({ clientX, clientY }) => {
-      setEyes(
-        eyes.concat({
-          left: `calc(${clientX}px - 50px)`,
-          top: `calc(${clientY}px - 25px)`,
-        })
-      );
-    },
-    [eyes]
-  );
-
-  const reset = () => {
-    setEyes([]);
-  };
-
   useEventListener("mousemove", handler);
-  useEventListener("mousedown", clickHandler);
 
   return (
     <div className="mouse-area">
-      {eyes.map((eye, index) => (
-        <Eyes mouseCoordinates={mouseCoordinates} style={eye} key={index} />
-      ))}
-      <span className="background-text">Click to add googly eyes!</span>
-      <button className="clear-button" onClick={reset}>
-        CLEAR
-      </button>
+      <Eyes
+        mouseCoordinates={mouseCoordinates}
+        style={{
+          left: "calc(50% - 50px)",
+          top: "calc(50% - 50px)",
+        }}
+      />
     </div>
   );
 }
