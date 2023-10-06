@@ -39,17 +39,17 @@ export default function Eye() {
     <div className="mouse-area">
       <Eyes
         mouseCoordinates={mouseCoordinates}
-        style={{
-          left: "calc(50% - 50px)",
-          top: "calc(50% - 50px)",
-        }}
+        // style={{
+        //   left: "calc(50% - 50px)",
+        //   top: "calc(50% - 50px)",
+        // }}
       />
     </div>
   );
 }
 
-const Eyes: FC<EyeProps & any> = ({ mouseCoordinates, ...rest }) => {
-  const eyesRef = useRef<HTMLElement>();
+const Eyes: FC<EyeProps> = ({ mouseCoordinates }) => {
+  const eyesRef = useRef<HTMLDivElement>(null);
 
   const getEyeStyle = () => {
     if (eyesRef.current) {
@@ -68,7 +68,7 @@ const Eyes: FC<EyeProps & any> = ({ mouseCoordinates, ...rest }) => {
   };
 
   return (
-    <div ref={eyesRef} className="eyes" {...rest}>
+    <div ref={eyesRef} className="eyes" style={{ left: "calc(50% - 50px" }}>
       <div className="eye" style={getEyeStyle()} />
       <div className="eye" style={getEyeStyle()} />
     </div>
